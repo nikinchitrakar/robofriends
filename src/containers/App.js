@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import CardList from '../components/CardList';
 import Searchbox from '../components/Searchbox';
 import Scroll from '../components/Scroll';
-import tachyons from 'tachyons';
+import ErrorBoundry from '../components/ErrorBoundry';
+import { setSearchField } from '../actions';
+
+const mapStateToProps = state => {
+  return {
+    searchField: state.searchField
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value))
+  }
+}
 
 class App extends Component {
   constructor(){
@@ -33,10 +47,12 @@ class App extends Component {
     }else{
       return(
         <div className="tc">
-          <h1>RoboFriends</h1>
+          <h1 className="f1">RoboFriends</h1>
           <Searchbox searchChange = {this.onSearchChange}/>
           <Scroll>
-            <CardList robots={filteredRobots}/>
+            <ErrorBoundry>
+              <CardList robots={filteredRobots}/>
+            </ErrorBoundry>
           </Scroll>
         </div>
       )
@@ -44,4 +60,6 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
