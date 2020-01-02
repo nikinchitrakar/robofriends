@@ -29,9 +29,9 @@ export const requestRobots = (state=initialStateRobots, action={}) => {
         case REQUEST_ROBOTS_PENDING:
             return Object.assign({}, state, {isPending: true});
         case REQUEST_ROBOTS_SUCCESS:
-            return Object.assign({}, state, { robots: state.payload, isPending: false });
+            return Object.assign({}, state, { robots: action.payload, isPending: false });
         case REQUEST_ROBOTS_FAILED:
-            return Object.assign({}, state, { error: state.payload, isPending: false });
+            return Object.assign({}, state, { error: action.payload, isPending: false });
         default:
             return state;
     }

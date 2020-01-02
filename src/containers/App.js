@@ -29,10 +29,9 @@ class App extends Component {
   }
   
   render(){
-    const { searchfield, robots, isPending, onSearchChange } = this.props;
-    console.log("robots::::",  robots);
+    const { searchField, robots, isPending, onSearchChange } = this.props;
     const filteredRobots = robots.filter(robot => {
-      return robot.name.toLowerCase().includes(searchfield.toLowerCase());
+      return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
     if (isPending){
       return <h1>Loading</h1>
